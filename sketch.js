@@ -1,11 +1,11 @@
-var img;
+let myImage;
+
+function preload(){
+  myImage = loadImage("assets/img.jpg");
+}
 
 function setup() {
   createCanvas(512, 683);
-  img = loadImage("assets/img.jpg");
-}
-
-function draw() {
-  image(img, 0, 0);
-  image(img, 0);
+  image(myImage, 0, 0);
+  filter(GRAY);
 }
