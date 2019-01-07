@@ -23,3 +23,8 @@ http://localhost:8080/
 
 ## Photo Credit
 Photo by James & Carol Lee on Unsplash
+
+## Resources
+
+1. Lines per Inch(http://facweb.cs.depaul.edu/sgrais/color_line_screen.htm)
+
