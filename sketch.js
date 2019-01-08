@@ -32,6 +32,30 @@ function halftone(originalImage, lpi) {
   return filteredImage;
 }
 
+function createGridWidth(originalImage, lpi) {
+  let gridWidth = 1 + (originalImage.width - 1) / lpi;
+  return gridWidth;
+}
+
+function createGridHeight(originalImage, lpi) {
+  let gridHeight = 1 + (originalImage.height - 1) / lpi;
+  return gridHeight;
+}
+
+function createMatrix(gridHeight, gridWidth, originalImage) {
+  var matrix = new Array(gridHeight);
+  for (var i = 0; i < matrix.length; i++) {
+    matrix[i] = new Array(gridWidth);
+  }
+  for (var i = 0; i < matrix.length; i++) {
+    for (var j = 0; j < matrix[i].length; j++) {
+      let intensity = calculateIntesityForGrid(originalImage, i, j, lpi);
+      matrix[i][j] = intensity;
+    }
+  }
+  return matrix;
+}
+
 // calculate the intesity of the average of this grid part
 function calculateIntesityForGrid(originalImage, matrixY, matrixX, lpi) {
   // calculate the pixel in this grid part
@@ -53,20 +77,6 @@ function calculateIntesityForPixel(img,index){
   return 1 - brightness/255;
 }
 
-function createMatrix(gridHeight, gridWidth, originalImage) {
-  var matrix = new Array(gridHeight);
-  for (var i = 0; i < matrix.length; i++) {
-    matrix[i] = new Array(gridWidth);
-  }
-  for (var i = 0; i < matrix.length; i++) {
-    for (var j = 0; j < matrix[i].length; j++) {
-      let intensity = calculateIntesityForGrid(originalImage, i, j, lpi);
-      matrix[i][j] = intensity;
-    }
-  }
-  return matrix;
-}
-
 function createFilteredImage(originalImage, matrix) {
   let filteredImage = createGraphics(originalImage.width, originalImage.height);
   filteredImage.background(255);
@@ -81,14 +91,4 @@ function createFilteredImage(originalImage, matrix) {
     }
   }
   return filteredImage;
-}
-
-function createGridWidth(originalImage, lpi) {
-  let gridWidth = 1 + (originalImage.width - 1) / lpi;
-  return gridWidth;
-}
-
-function createGridHeight(originalImage, lpi) {
-  let gridHeight = 1 + (originalImage.height - 1) / lpi;
-  return gridHeight;
 }
