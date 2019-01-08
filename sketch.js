@@ -27,7 +27,7 @@ function halftone(originalImage, lpi) {
   let matrix = createMatrix(gridHeight, gridWidth, originalImage);
 
   // draw circles
-  let filteredImage = makeFilteredImage(originalImage, matrix);
+  let filteredImage = createFilteredImage(originalImage, matrix);
 
   return filteredImage;
 }
@@ -67,7 +67,7 @@ function createMatrix(gridHeight, gridWidth, originalImage) {
   return matrix;
 }
 
-function makeFilteredImage(originalImage, matrix) {
+function createFilteredImage(originalImage, matrix) {
   let filteredImage = createGraphics(originalImage.width, originalImage.height);
   filteredImage.background(255);
   filteredImage.noStroke();
