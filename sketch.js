@@ -24,10 +24,10 @@ function halftone(originalImage, lpi) {
   let gridHeight = 1 + (originalImage.height - 1) / lpi;
 
   // matrix
-  var matrix = createMatrix(gridHeight, gridWidth, originalImage);
+  let matrix = createMatrix(gridHeight, gridWidth, originalImage);
 
   // draw circles
-  var filteredImage = makeFilteredImage(originalImage, matrix);
+  let filteredImage = makeFilteredImage(originalImage, matrix);
 
   return filteredImage;
 }
