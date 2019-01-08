@@ -27,18 +27,7 @@ function halftone(originalImage, lpi) {
   var matrix = createMatrix(gridHeight, gridWidth, originalImage);
 
   // draw circles
-  let filteredImage = createGraphics(originalImage.width, originalImage.height);
-  filteredImage.background(255);
-  filteredImage.noStroke();
-
-  for (var i = 0; i < matrix.length; i++) {
-    for (var j = 0; j < matrix[i].length; j++) {
-      let centerY = i * lpi + lpi/2;
-      let centerX = j * lpi + lpi/2;
-      let radius = Math.hypot(lpi/2,lpi/2) * matrix[i][j];
-      filteredImage.ellipse(centerX, centerY, radius, radius);
-    }
-  }
+  var filteredImage = makeFilteredImage(originalImage, matrix);
 
   return filteredImage;
 }
@@ -76,4 +65,20 @@ function createMatrix(gridHeight, gridWidth, originalImage) {
     }
   }
   return matrix;
+}
+
+function makeFilteredImage(originalImage, matrix) {
+  let filteredImage = createGraphics(originalImage.width, originalImage.height);
+  filteredImage.background(255);
+  filteredImage.noStroke();
+
+  for (var i = 0; i < matrix.length; i++) {
+    for (var j = 0; j < matrix[i].length; j++) {
+      let centerY = i * lpi + lpi/2;
+      let centerX = j * lpi + lpi/2;
+      let radius = Math.hypot(lpi/2,lpi/2) * matrix[i][j];
+      filteredImage.ellipse(centerX, centerY, radius, radius);
+    }
+  }
+  return filteredImage;
 }
