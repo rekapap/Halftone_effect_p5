@@ -24,16 +24,7 @@ function halftone(originalImage, lpi) {
   let gridHeight = 1 + (originalImage.height - 1) / lpi;
 
   // matrix
-  var matrix = new Array(gridHeight);
-  for (var i = 0; i < matrix.length; i++) {
-    matrix[i] = new Array(gridWidth);
-  }
-  for (var i = 0; i < matrix.length; i++) {
-    for (var j = 0; j < matrix[i].length; j++) {
-      let intensity = calculateIntesityForGrid(originalImage, i, j, lpi);
-      matrix[i][j] = intensity;
-    }
-  }
+  var matrix = createMatrix(gridHeight, gridWidth, originalImage);
 
   // draw circles
   let filteredImage = createGraphics(originalImage.width, originalImage.height);
@@ -73,3 +64,16 @@ function calculateIntesityForPixel(img,index){
   return 1 - brightness/255;
 }
 
+function createMatrix(gridHeight, gridWidth, originalImage) {
+  var matrix = new Array(gridHeight);
+  for (var i = 0; i < matrix.length; i++) {
+    matrix[i] = new Array(gridWidth);
+  }
+  for (var i = 0; i < matrix.length; i++) {
+    for (var j = 0; j < matrix[i].length; j++) {
+      let intensity = calculateIntesityForGrid(originalImage, i, j, lpi);
+      matrix[i][j] = intensity;
+    }
+  }
+  return matrix;
+}
