@@ -21,7 +21,7 @@ function draw() {
 function halftone(originalImage, lpi) {
 
   let gridWidth = createGridWidth(originalImage, lpi);
-  let gridHeight = 1 + (originalImage.height - 1) / lpi;
+  let gridHeight = createGridHeight(originalImage, lpi);
 
   // matrix
   let matrix = createMatrix(gridHeight, gridWidth, originalImage);
@@ -86,4 +86,9 @@ function makeFilteredImage(originalImage, matrix) {
 function createGridWidth(originalImage, lpi) {
   let gridWidth = 1 + (originalImage.width - 1) / lpi;
   return gridWidth;
+}
+
+function createGridHeight(originalImage, lpi) {
+  let gridHeight = 1 + (originalImage.height - 1) / lpi;
+  return gridHeight;
 }
