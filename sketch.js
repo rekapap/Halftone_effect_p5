@@ -30,7 +30,7 @@ function halftone(originalImage, lpi) {
   }
   for (var i = 0; i < matrix.length; i++) {
     for (var j = 0; j < matrix[i].length; j++) {
-      let intensity = calculateIntesity(originalImage, i, j, lpi);
+      let intensity = calculateIntesityForGrid(originalImage, i, j, lpi);
       matrix[i][j] = intensity;
     }
   }
@@ -53,6 +53,23 @@ function halftone(originalImage, lpi) {
 }
 
 // calculate the intesity of the average of this grid part
-function calculateIntesity(originalImage, matrixY, matrixX, lpi) {
+function calculateIntesityForGrid(originalImage, matrixY, matrixX, lpi) {
   // calculate the pixel in this grid part
+
+  // let pixelPositionX;
+  // let pixelPositionY;
+  // var index = (x + y * originalImage.width) * 4;
+  // calculateIntesityForPixel(originalImage, index);
+  // return ;
 }
+
+function calculateIntesityForPixel(img,index){
+  let red = img.pixels[index];
+  let green = img.pixels[index + 1];
+  let blue = img.pixels[index + 2];
+  let color = color(red, green, blue)
+  let brightness = brightness(color);
+
+  return 1 - brightness/255;
+}
+
