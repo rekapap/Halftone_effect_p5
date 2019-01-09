@@ -23,6 +23,7 @@ http://localhost:8080/
 
 ## Photo Credit
 Photo by James & Carol Lee on Unsplash
+Photo by Lindie Wilton on Unsplash
 
 ## Resources
 
