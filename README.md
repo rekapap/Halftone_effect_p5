@@ -24,9 +24,8 @@ http://localhost:8080/
 ```
 
 ## Photo Credits
-Photo by James & Carol Lee on Unsplash
-
-Photo by Lindie Wilton on Unsplash
+Woman photo: Photo by Lindie Wilton on Unsplash
+Feather photo: Photo by James & Carol Lee on Unsplash
 
 ## Resources
 
