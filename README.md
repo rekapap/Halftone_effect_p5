@@ -2,6 +2,8 @@
 
 Halftone effect made with p5.js (Processing).
 
+![Halftone effect](./assets/thumb.jpg "Halftone effect")
+
 # Setup
 
 1. Install the server.
