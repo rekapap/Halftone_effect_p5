@@ -2,23 +2,24 @@
 
 let originalImage;
 var filteredImage;
-let lpi = 45;
+let lpi = 5;
 
 function preload(){
-  originalImage = loadImage("assets/img.jpg");
+  originalImage = loadImage("assets/img.jpeg");
 }
 
 function setup() {
-  createCanvas(1024, 683);
-  //filteredImage = halftone(originalImage, lpi);
+  createCanvas(originalImage.width * 2, originalImage.height);
+  filteredImage = halftone(originalImage, lpi);
 }
 
 function draw() {
   image(originalImage, 0, 0);
-  image(filteredImage, 512, 0);
+  image(filteredImage, originalImage.width, 0);
 }
 
 function halftone(originalImage, lpi) {
+  originalImage.loadPixels();
 
   let gridWidth = createGridWidth(originalImage, lpi);
   let gridHeight = createGridHeight(originalImage, lpi);
@@ -33,12 +34,12 @@ function halftone(originalImage, lpi) {
 }
 
 function createGridWidth(originalImage, lpi) {
-  let gridWidth = 1 + (originalImage.width - 1) / lpi;
+  let gridWidth = Math.ceil(originalImage.width/lpi);
   return gridWidth;
 }
 
 function createGridHeight(originalImage, lpi) {
-  let gridHeight = 1 + (originalImage.height - 1) / lpi;
+  let gridHeight = Math.ceil(originalImage.height/lpi);
   return gridHeight;
 }
 
@@ -58,35 +59,51 @@ function createMatrix(gridHeight, gridWidth, originalImage) {
 
 // calculate the intesity of the average of this grid part
 function calculateIntesityForGrid(originalImage, matrixY, matrixX, lpi) {
-  // calculate the pixel in this grid part
+  // calculate the pixel positions in this grid part
+  let gridIntensity = 0;
+  let pixels = 0;
 
-  // let pixelPositionX;
-  // let pixelPositionY;
-  // var index = (x + y * originalImage.width) * 4;
-  // calculateIntesityForPixel(originalImage, index);
-  // return ;
+  let imageWidth = originalImage.width;
+  let imageHeight = originalImage.height;
+
+  for (var i = 0; i < lpi ; i++) {
+    let pixelPositionY = matrixY * lpi + i;
+    if(pixelPositionY >= imageHeight) continue;
+
+    for (var j = 0; j < lpi; j++) {
+      let pixelPositionX = matrixX * lpi + j;
+      if(pixelPositionX >= imageWidth) continue;
+
+      // calculte pixel intensity
+      let index = (pixelPositionY * imageWidth + pixelPositionX) * 4;
+      gridIntensity += calculateIntesityForPixel(originalImage, index);
+      pixels++;
+    }
+  }
+  return gridIntensity/pixels;
 }
 
 function calculateIntesityForPixel(img,index){
   let red = img.pixels[index];
   let green = img.pixels[index + 1];
   let blue = img.pixels[index + 2];
-  let color = color(red, green, blue)
-  let brightness = brightness(color);
-
-  return 1 - brightness/255;
+  let alpha = img.pixels[index + 3];
+  let pixelColor = color(red, green, blue, alpha);
+  let pixelBrightness = brightness(pixelColor);
+  return 1 - pixelBrightness/255;
 }
 
 function createFilteredImage(originalImage, matrix) {
   let filteredImage = createGraphics(originalImage.width, originalImage.height);
   filteredImage.background(255);
   filteredImage.noStroke();
+  filteredImage.fill(0);
 
   for (var i = 0; i < matrix.length; i++) {
     for (var j = 0; j < matrix[i].length; j++) {
       let centerY = i * lpi + lpi/2;
       let centerX = j * lpi + lpi/2;
-      let radius = Math.hypot(lpi/2,lpi/2) * matrix[i][j];
+      let radius = Math.hypot(lpi,lpi) * matrix[i][j];
       filteredImage.ellipse(centerX, centerY, radius, radius);
     }
   }
