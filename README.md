@@ -23,9 +23,17 @@ http-server
 http://localhost:8080/
 ```
 
+## How to use it with your image
+
+Change in sketch.js(line 8) the image path to yours:
+```js
+originalImage = loadImage("YOURPATH");
+```
+
+
 ## Photo Credits
-Woman photo: Photo by Lindie Wilton on Unsplash
-Feather photo: Photo by James & Carol Lee on Unsplash
+1. Woman photo: Photo by Lindie Wilton on Unsplash
+2. Feather photo: Photo by James & Carol Lee on Unsplash
 
 ## Resources
 
