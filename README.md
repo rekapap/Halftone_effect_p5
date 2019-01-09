@@ -21,8 +21,9 @@ http-server
 http://localhost:8080/
 ```
 
-## Photo Credit
+## Photo Credits
 Photo by James & Carol Lee on Unsplash
+
 Photo by Lindie Wilton on Unsplash
 
 ## Resources
