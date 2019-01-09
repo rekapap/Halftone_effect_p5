@@ -90,7 +90,7 @@ function calculateIntesityForPixel(img,index){
   let alpha = img.pixels[index + 3];
   let pixelColor = color(red, green, blue, alpha);
   let pixelBrightness = brightness(pixelColor);
-  return 1 - pixelBrightness/255;
+  return 1 - pixelBrightness/100;
 }
 
 function createFilteredImage(originalImage, matrix) {
