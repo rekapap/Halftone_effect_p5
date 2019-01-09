@@ -38,4 +38,5 @@ originalImage = loadImage("YOURPATH");
 ## Resources
 
 1. Lines per Inch(http://facweb.cs.depaul.edu/sgrais/color_line_screen.htm)
+2. p5 Library Reference(https://p5js.org/reference/)
 
